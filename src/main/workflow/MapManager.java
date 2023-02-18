@@ -14,7 +14,7 @@ public class MapManager {
     // Silver - 10
     private Map<MaterialTypes, Integer> commodityToCreditMap;
 
-    private Map<String, String> creditQueryResultMap;
+    private Map<String, Integer> creditQueryResultMap;
     private Map<String, Integer> romanNumberQueryResultMap;
 
     private MapManager() {
@@ -28,7 +28,7 @@ public class MapManager {
         return mapManager;
     }
 
-    public void addCreditQueryEntry(String romanNumeralFromQuery, String result) {
+    public void addCreditQueryEntry(String romanNumeralFromQuery, Integer result) {
         creditQueryResultMap.put(romanNumeralFromQuery, result);
     }
 
@@ -39,7 +39,7 @@ public class MapManager {
 
     public String getCreditQueryResultMapAsString() {
         String result = "";
-        for (Map.Entry<String, String> entry : creditQueryResultMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : creditQueryResultMap.entrySet()) {
             result += entry.getKey() + " is " + entry.getValue() + " Credits\n";
         }
         return result;
@@ -55,6 +55,10 @@ public class MapManager {
 
     public int getIntegerResultFromRomanNumeral(String romanNumber){
         return romanNumberQueryResultMap.get(romanNumber);
+    }
+
+    public int getCreditValueFromRomanvNumeral(String romanNumber){
+        return creditQueryResultMap.get(romanNumber);
     }
 
     public void addUnitToRomanNumeralEntry(String key, RomanSymbols value) {

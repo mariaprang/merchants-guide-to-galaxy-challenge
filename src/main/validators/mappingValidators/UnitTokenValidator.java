@@ -1,8 +1,12 @@
 package main.validators.mappingValidators;
 
 import main.enums.ValidationStatus;
+import main.inputKeywords.InputKeywords;
 import main.validators.ValidationResult;
 import main.validators.ValidatorBase;
+import main.workflow.MapManager;
+
+import java.util.Set;
 
 public class UnitTokenValidator extends ValidatorBase {
 
@@ -16,10 +20,20 @@ public class UnitTokenValidator extends ValidatorBase {
 
     @Override
     public ValidationResult validate(String inputLine) {
+
         ValidationResult checkInputResult = checkInputEmpty(inputLine);
         if (checkInputResult.getStatus().equals(ValidationStatus.INVALID)) {
             return checkInputResult;
         }
-        return null;
+
+        String[] unitTokens = inputLine.split(InputKeywords.DELIMITER);
+        MapManager mapManager = MapManager.getInstance();
+        Set<String> validUnitTokens = mapManager.getUnitToRomanNumeralMap().keySet();
+        for (int index = 0; index < unitTokens.length - 1; index++) {
+            if (!validUnitTokens.contains(unitTokens[index])) {
+                return new ValidationResult (ValidationStatus.INVALID, "Unit " + unitTokens[index] + " is unknown!");
+            }
+        }
+        return new ValidationResult (ValidationStatus.VALID, "");
     }
 }

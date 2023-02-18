@@ -2,6 +2,7 @@ package main.parsers;
 
 import main.converters.RomanToIntegerConverter;
 import main.converters.TokenToRomanNumberConverter;
+import main.enums.MaterialTypes;
 import main.enums.ValidationStatus;
 import main.enums.ValidatorTypes;
 import main.inputKeywords.InputKeywords;
@@ -13,12 +14,14 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RomanNumeralQueryParser implements Parser {
+public class RomanNumberMetalQueryParser implements Parser {
+
     @Override
     public void parse(String inputLine) {
+        // how many Credits is glob prok Silver
+
         String[] inputTokens = inputLine.split(InputKeywords.DELIMITER);
-        int sizeOfPhrase = InputKeywords.ROMAN_NUMERAL_QUESTION_PHRASE.split(InputKeywords.DELIMITER).length;
-        // how much is pish tegj glob glob
+        int sizeOfPhrase = InputKeywords.CREDIT_PHRASE.split(InputKeywords.DELIMITER).length;
         String unitTokens = "";
         for (int index = sizeOfPhrase; index < inputTokens.length; index++) {
             if(!inputTokens[index].equals("?")){
@@ -26,10 +29,22 @@ public class RomanNumeralQueryParser implements Parser {
 
             }
         }
+        unitTokens = unitTokens.trim(); // glob prok Silver
 
-        unitTokens = unitTokens.trim();
+        String[] unitsAndCommodityTokens = unitTokens.trim().split(InputKeywords.DELIMITER);
+        String units = "";
+        for (int index = 0; index < unitsAndCommodityTokens.length - 1; index++) {
+            units += unitsAndCommodityTokens[index] + InputKeywords.DELIMITER;
+        }
 
-        String romanNumber = TokenToRomanNumberConverter.convertToRomanNumber(unitTokens);
+        ValidatorManager manager = new ValidatorManager();
+        ValidationResult validationResult = manager.runValidatorByType(units, ValidatorTypes.UNIT_TOKEN_VALIDATOR);
+        if (validationResult.getStatus().equals(ValidationStatus.INVALID)) {
+            throw new InvalidParameterException(validationResult.getMessage());
+        }
+
+        String commodityString = unitsAndCommodityTokens[unitsAndCommodityTokens.length - 1];
+        String romanNumber = TokenToRomanNumberConverter.convertToRomanNumber(units.trim());
         List<ValidationResult> validationResultLists = runValidatorsOnRomanNumber(romanNumber);
 
         for (ValidationResult result : validationResultLists) {
@@ -38,10 +53,16 @@ public class RomanNumeralQueryParser implements Parser {
             }
         }
 
-        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        MaterialTypes materialType = MaterialTypes.getMaterialByValue(commodityString);
 
-        int romanNumberValue = converter.convertRomanToInteger(romanNumber);
-        MapManager.getInstance().addRomanNumberQueryEntry(unitTokens, romanNumberValue);
+        int metalValue = MapManager.getInstance().getCreditByCommodity(materialType);
+        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        int romanNumberInteger = converter.convertRomanToInteger(romanNumber);
+
+        int credits = romanNumberInteger * metalValue;
+
+        MapManager.getInstance().addCreditQueryEntry(unitTokens, credits);
+
     }
 
     private List<ValidationResult> runValidatorsOnRomanNumber(String romanNumber) {

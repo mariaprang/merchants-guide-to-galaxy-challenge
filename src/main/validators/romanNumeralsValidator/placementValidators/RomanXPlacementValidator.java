@@ -17,6 +17,6 @@ public class RomanXPlacementValidator extends RomanNumeralValidatorBase {
             return checkInputResult;
         }
         return validateSymbolPlacement(inputLine, RomanSymbols.X,
-                Arrays.asList(RomanSymbols.L.getRomanNumeral(), RomanSymbols.C.getRomanNumeral()));
+                Arrays.asList(RomanSymbols.L.getRomanNumeral(), RomanSymbols.C.getRomanNumeral(), RomanSymbols.X.getRomanNumeral()));
     }
 }

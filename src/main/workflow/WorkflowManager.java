@@ -1,10 +1,9 @@
 package main.workflow;
+
 import main.enums.MaterialTypes;
 import main.enums.InputTypes;
 import main.inputKeywords.InputKeywords;
-import main.parsers.MetalPriceInformationParser;
-import main.parsers.MapperParser;
-import main.parsers.Parser;
+import main.parsers.*;
 import main.validators.ValidatorManager;
 
 import java.io.*;
@@ -58,14 +57,18 @@ public class WorkflowManager {
                         parser = new MetalPriceInformationParser();
                         break;
                     case ROMAN_NUMBER_QUESTION:
+                        parser = new RomanNumeralQueryParser();
                         break;
                     case CREDIT_VALUE_QUESTION:
+                        parser = new RomanNumberMetalQueryParser();
                         break;
                     default:
                         break;
                 }
                 parser.parse(line);
             }
+            System.out.println(MapManager.getInstance().getCreditQueryResultMapAsString());
+            System.out.println(MapManager.getInstance().getRomanNumberQueryResultMapAsString());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
