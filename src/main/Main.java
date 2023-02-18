@@ -1,6 +1,5 @@
 package main;
 
-import main.enums.RomanSymbols;
 import main.workflow.WorkflowManager;
 
 public class Main {
@@ -11,3 +10,10 @@ public class Main {
     }
 
 }
+
+/*
+> pish tegj glob glob is 42
+> glob prok Silver is 68 Credits
+> glob prok Gold is 57800 Credits
+> glob prok Iron is 782 Credits
+ */

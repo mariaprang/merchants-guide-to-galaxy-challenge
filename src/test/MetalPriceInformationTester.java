@@ -27,8 +27,8 @@ public class MetalPriceInformationTester {
     @Test
     public void metalTypePriceEvaluationValidTest(){
         parser.parse("glob glob Silver is 34 Credits");
-        int silverCreditValue = mapManager.getCreditByCommodity(MaterialTypes.SILVER);
-        Assert.assertEquals(17, silverCreditValue);
+        double silverCreditValue = mapManager.getCreditByCommodity(MaterialTypes.SILVER);
+        Assert.assertEquals(17, silverCreditValue, 0);
     }
 
     @Test(expected = InvalidParameterException.class)

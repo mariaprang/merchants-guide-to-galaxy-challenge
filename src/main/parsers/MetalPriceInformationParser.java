@@ -42,17 +42,22 @@ public class MetalPriceInformationParser implements Parser {
         MaterialTypes materialType = MaterialTypes.getMaterialByValue(commodityString);
 
         String romanNumber = TokenToRomanNumberConverter.convertToRomanNumber(units.trim());
-        List<ValidationResult> validationResultLists = runValidatorsOnRomanNumber(romanNumber);
+        List<ValidationResult> validationResultList = runValidatorsOnRomanNumber(romanNumber);
 
-        for (ValidationResult result : validationResultLists) {
+        List<String> errorMessages = new ArrayList<>();
+        for (ValidationResult result : validationResultList) {
             if (result.getStatus().equals(ValidationStatus.INVALID)) {
-                throw new InvalidParameterException(result.getMessage());
+                errorMessages.add(result.getMessage());
             }
+        }
+
+        if (errorMessages.size() > 0) {
+            throw new InvalidParameterException(errorMessages.toArray().toString());
         }
 
         RomanToIntegerConverter converter = new RomanToIntegerConverter();
         int metalValueInteger = converter.convertRomanToInteger(romanNumber);
-        MapManager.getInstance().addCommodityToCreditEntry(materialType, (credits / metalValueInteger));
+        MapManager.getInstance().addCommodityToCreditEntry(materialType, ( (double) credits / metalValueInteger));
 
     }
 

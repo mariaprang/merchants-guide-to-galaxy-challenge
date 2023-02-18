@@ -55,11 +55,11 @@ public class RomanNumberMetalQueryParser implements Parser {
 
         MaterialTypes materialType = MaterialTypes.getMaterialByValue(commodityString);
 
-        int metalValue = MapManager.getInstance().getCreditByCommodity(materialType);
+        double metalValue = MapManager.getInstance().getCreditByCommodity(materialType);
         RomanToIntegerConverter converter = new RomanToIntegerConverter();
         int romanNumberInteger = converter.convertRomanToInteger(romanNumber);
 
-        int credits = romanNumberInteger * metalValue;
+        double credits = romanNumberInteger * metalValue;
 
         MapManager.getInstance().addCreditQueryEntry(unitTokens, credits);
 

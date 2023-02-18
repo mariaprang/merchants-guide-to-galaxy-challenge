@@ -30,8 +30,8 @@ public class RomanNumberMetalQueryParserTest {
     @Test
     public void romanNumberCreditQueryValidTest() {
         parser.parse("how many Credits is glob prok Silver");
-        int creditValue = mapManager.getCreditValueFromRomanvNumeral("glob prok Silver");
-        Assert.assertEquals(68, creditValue);
+        double creditValue = mapManager.getCreditValueFromRomanvNumeral("glob prok Silver");
+        Assert.assertEquals(68, creditValue,0);
     }
 
     @Test(expected = InvalidParameterException.class)
