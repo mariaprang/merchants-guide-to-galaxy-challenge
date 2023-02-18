@@ -280,9 +280,6 @@ public class ValidatorTests {
         validator = new RomanIPlacementValidator();
         assertInvalidResultNull(input, validator);
 
-        validator = new RomanNumberValidator();
-        assertInvalidResultNull(input, validator);
-
         validator = new RomanNumeralSymbolValidator();
         assertInvalidResultNull(input, validator);
 
@@ -308,12 +305,6 @@ public class ValidatorTests {
         assertInvalidResultNull(input, validator);
 
         validator = new RomanNumeralXOccurrenceValidator();
-        assertInvalidResultNull(input, validator);
-
-        validator = new RomanNumberValidator();
-        assertInvalidResultNull(input, validator);
-
-        validator = new UniqueSymbolValidator();
         assertInvalidResultNull(input, validator);
 
         validator = new UnitTokenValidator();

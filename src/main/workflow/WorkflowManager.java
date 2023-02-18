@@ -9,10 +9,10 @@ import java.io.*;
 public class WorkflowManager {
 
     private File file;
-    private ValidatorManager validator;
+    private ValidatorManager validatorManager;
 
     public WorkflowManager(String filePath) {
-        this.validator = new ValidatorManager();
+        this.validatorManager = ValidatorManager.getInstance();
         this.file = new File(filePath);
     }
 
@@ -21,7 +21,7 @@ public class WorkflowManager {
                 && inputLine.split(InputKeywords.DELIMITER).length == 3) {
             return InputTypes.MAPPING;
         } else if (checkIfInputContainsCommodityInformation(inputLine)) {
-            return InputTypes.COMMODITY_PRICE_INFORMATION;
+            return InputTypes.COMMODITY_PRICE_INFORMATION; // glob glob Iron
         } else if (inputLine.contains(InputKeywords.CREDIT_PHRASE)) {
             return InputTypes.CREDIT_VALUE_QUESTION;
         } else if (inputLine.contains(InputKeywords.ROMAN_NUMERAL_QUESTION_PHRASE)) {
