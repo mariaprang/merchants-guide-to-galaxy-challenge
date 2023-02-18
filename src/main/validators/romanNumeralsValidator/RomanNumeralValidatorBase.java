@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class RomanNumeralValidatorBase extends ValidatorBase {
 
-    protected ValidationResult validateSymbolPlacement(String input, RomanSymbols symbol, List<RomanSymbols> validSymbolsList) {
+    protected ValidationResult validateSymbolPlacement(String input, RomanSymbols symbol, List<String> validSymbolsList) {
         for (int index = 0; index < input.length() - 1; index++) {
             String currentSymbol = String.valueOf(input.charAt(index));
             if (!currentSymbol.equals(symbol.getRomanNumeral())) {

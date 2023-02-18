@@ -14,6 +14,37 @@ import org.junit.Test;
 
 public class ValidatorTests {
 
+
+    @Test
+    public void romanCPlacementValidatorValidTest() {
+        RomanCPlacementValidator validator = new RomanCPlacementValidator();
+        ValidationResult resultCD = validator.validate("CD");
+        Assert.assertEquals(ValidationStatus.VALID, resultCD.getStatus());
+
+        ValidationResult resultCM = validator.validate("CM");
+        Assert.assertEquals(ValidationStatus.VALID, resultCM.getStatus());
+    }
+
+    @Test
+    public void romanCPlacementValidatorInvalidTest() {
+        RomanCPlacementValidator validator = new RomanCPlacementValidator();
+        ValidationResult resultCI = validator.validate("CI");
+        Assert.assertEquals(ValidationStatus.INVALID, resultCI.getStatus());
+
+        ValidationResult resultCX = validator.validate("CX");
+        Assert.assertEquals(ValidationStatus.INVALID, resultCX.getStatus());
+
+        ValidationResult resultCL = validator.validate("CL");
+        Assert.assertEquals(ValidationStatus.INVALID, resultCL.getStatus());
+
+        ValidationResult resultCV = validator.validate("CV");
+        Assert.assertEquals(ValidationStatus.INVALID, resultCV.getStatus());
+
+        ValidationResult resultCC = validator.validate("CC");
+        Assert.assertEquals(ValidationStatus.INVALID, resultCC.getStatus());
+    }
+
+
     @Test
     public void romanIPlacementValidatorValidTest() {
         RomanIPlacementValidator validator = new RomanIPlacementValidator();
@@ -45,6 +76,34 @@ public class ValidatorTests {
         ValidationResult resultIM = validator.validate("IM");
         Assert.assertEquals(ValidationStatus.INVALID, resultIM.getStatus());
     }
+
+
+    @Test
+    public void romanXPlacementValidatorValidTest() {
+        RomanIPlacementValidator validator = new RomanIPlacementValidator();
+        ValidationResult resultXL = validator.validate("XL");
+        Assert.assertEquals(ValidationStatus.VALID, resultXL.getStatus());
+
+        ValidationResult resultXC = validator.validate("XC");
+        Assert.assertEquals(ValidationStatus.VALID, resultXC.getStatus());
+    }
+
+    @Test
+    public void romanXPlacementValidatorInvalidTest() {
+        RomanXPlacementValidator validator = new RomanXPlacementValidator();
+        ValidationResult resultXI = validator.validate("XI");
+        Assert.assertEquals(ValidationStatus.INVALID, resultXI.getStatus());
+
+        ValidationResult resultXV = validator.validate("XV");
+        Assert.assertEquals(ValidationStatus.INVALID, resultXV.getStatus());
+
+        ValidationResult resultXD = validator.validate("XD");
+        Assert.assertEquals(ValidationStatus.INVALID, resultXD.getStatus());
+
+        ValidationResult resultXM = validator.validate("XM");
+        Assert.assertEquals(ValidationStatus.INVALID, resultXM.getStatus());
+    }
+
 
     @Test
     public void inputLineNullTest() {
@@ -182,6 +241,38 @@ public class ValidatorTests {
         Assert.assertEquals(ValidationStatus.INVALID, result.getStatus());
     }
 
+    @Test
+    public void romanSymbolValidTest() {
+        RomanNumeralSymbolValidator validator = new RomanNumeralSymbolValidator();
+        ValidationResult result = validator.validate("I");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+
+        result = validator.validate("V");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+
+        result = validator.validate("X");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+
+        result = validator.validate("L");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+
+        result = validator.validate("C");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+
+        result = validator.validate("D");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+
+        result = validator.validate("M");
+        Assert.assertEquals(ValidationStatus.VALID, result.getStatus());
+    }
+
+    @Test
+    public void romanSymbolInvalidTest() {
+        RomanNumeralSymbolValidator validator = new RomanNumeralSymbolValidator();
+        ValidationResult result = validator.validate("A");
+        Assert.assertEquals(ValidationStatus.INVALID, result.getStatus());
+    }
+
     private void inputLineNullOrEmptyValidateTest(String input) {
 
         ValidatorBase validator = new RomanCPlacementValidator();
@@ -191,9 +282,6 @@ public class ValidatorTests {
         assertInvalidResultNull(input, validator);
 
         validator = new RomanNumberValidator();
-        assertInvalidResultNull(input, validator);
-
-        validator = new RomanNumeralsOrderValidator();
         assertInvalidResultNull(input, validator);
 
         validator = new RomanNumeralSymbolValidator();

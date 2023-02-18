@@ -9,6 +9,7 @@ import java.util.List;
 public interface Validator {
 
     /**
+     * SYMBOLS: I, X, C, M, L, D, V
      * RULES:
      * 1. Occurrence:
      * --- The symbols "I", "X", "C", and "M" can be repeated three times in succession
