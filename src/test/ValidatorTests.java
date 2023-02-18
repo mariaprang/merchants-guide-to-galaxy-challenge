@@ -14,7 +14,6 @@ import org.junit.Test;
 
 public class ValidatorTests {
 
-
     @Test
     public void romanCPlacementValidatorValidTest() {
         RomanCPlacementValidator validator = new RomanCPlacementValidator();

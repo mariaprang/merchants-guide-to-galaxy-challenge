@@ -11,15 +11,18 @@ public enum RomanSymbols {
     D(500),
     M(1000);
 
-    private int arabicValue;
+    private int integerValue;
 
-    private RomanSymbols(int arabicValue) {
-        this.arabicValue = arabicValue;
+    private RomanSymbols(int integerValue) {
+        this.integerValue = integerValue;
     }
 
     public String getRomanNumeral() {
         return this.toString();
     }
 
+    public int getIntegerValue() {
+        return integerValue;
+    }
 }
 
