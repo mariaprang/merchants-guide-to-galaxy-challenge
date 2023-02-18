@@ -1,7 +1,7 @@
 package main.validators;
 
-import main.validators.romanNumeralsValidator.RomanCPlacementValidator;
-import main.validators.romanNumeralsValidator.RomanIPlacementValidator;
+import main.validators.romanNumeralsValidator.placementValidators.RomanCPlacementValidator;
+import main.validators.romanNumeralsValidator.placementValidators.RomanIPlacementValidator;
 import main.validators.romanNumeralsValidator.RomanNumeralValidatorBase;
 
 import java.util.ArrayList;

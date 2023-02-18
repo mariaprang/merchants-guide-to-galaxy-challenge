@@ -1,14 +1,10 @@
 package main.validators.mappingValidators;
 
 import main.enums.ValidationStatus;
-import main.inputKeywords.InputKeywords;
 import main.validators.ValidationResult;
-import main.validators.interfaces.Validator;
-import main.workflow.MapManager;
+import main.validators.ValidatorBase;
 
-import java.util.Set;
-
-public class UnitTokenValidator implements Validator {
+public class UnitTokenValidator extends ValidatorBase {
 
     /**
      * This method validates that a unit token passed as a parameter, such as "glob" or "pish" is indeed a valid
@@ -20,6 +16,10 @@ public class UnitTokenValidator implements Validator {
 
     @Override
     public ValidationResult validate(String inputLine) {
+        ValidationResult checkInputResult = checkInputEmpty(inputLine);
+        if (checkInputResult.getStatus().equals(ValidationStatus.INVALID)) {
+            return checkInputResult;
+        }
         return null;
     }
 }

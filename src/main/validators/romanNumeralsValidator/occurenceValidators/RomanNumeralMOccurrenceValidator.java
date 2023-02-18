@@ -1,18 +1,18 @@
-package main.validators.romanNumeralsValidator;
+package main.validators.romanNumeralsValidator.occurenceValidators;
 
-import main.enums.InputTypes;
+import main.enums.RomanSymbols;
 import main.enums.ValidationStatus;
 import main.validators.ValidationResult;
+import main.validators.romanNumeralsValidator.RomanNumeralValidatorBase;
 
-public class RomanNumeralsOrderValidator extends RomanNumeralValidatorBase {
+public class RomanNumeralMOccurrenceValidator extends RomanNumeralValidatorBase {
+
     @Override
     public ValidationResult validate(String inputLine) {
         ValidationResult checkInputResult = checkInputEmpty(inputLine);
         if (checkInputResult.getStatus().equals(ValidationStatus.INVALID)) {
             return checkInputResult;
         }
-        return null;
+        return validateSymbolOccurrence(inputLine, RomanSymbols.M, 3);
     }
-
-
 }

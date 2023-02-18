@@ -17,7 +17,10 @@ public class RomanNumeralSymbolValidator  extends RomanNumeralValidatorBase  {
 
     @Override
     public ValidationResult validate(String romanSymbol)  {
-
+        ValidationResult checkInputResult = checkInputEmpty(romanSymbol);
+        if (checkInputResult.getStatus().equals(ValidationStatus.INVALID)) {
+            return checkInputResult;
+        }
        return null;
     }
 }
