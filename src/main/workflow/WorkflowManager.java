@@ -2,6 +2,9 @@ package main.workflow;
 import main.enums.MaterialTypes;
 import main.enums.InputTypes;
 import main.inputKeywords.InputKeywords;
+import main.parsers.MetalPriceInformationParser;
+import main.parsers.MapperParser;
+import main.parsers.Parser;
 import main.validators.ValidatorManager;
 
 import java.io.*;
@@ -10,9 +13,10 @@ public class WorkflowManager {
 
     private File file;
     private ValidatorManager validatorManager;
+    private Parser parser;
 
     public WorkflowManager(String filePath) {
-        this.validatorManager = ValidatorManager.getInstance();
+        this.validatorManager = new ValidatorManager();
         this.file = new File(filePath);
     }
 
@@ -48,8 +52,10 @@ public class WorkflowManager {
                 InputTypes inputType = getInputType(line);
                 switch (inputType) {
                     case MAPPING:
+                        parser = new MapperParser();
                         break;
                     case COMMODITY_PRICE_INFORMATION:
+                        parser = new MetalPriceInformationParser();
                         break;
                     case ROMAN_NUMBER_QUESTION:
                         break;
@@ -58,7 +64,7 @@ public class WorkflowManager {
                     default:
                         break;
                 }
-
+                parser.parse(line);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

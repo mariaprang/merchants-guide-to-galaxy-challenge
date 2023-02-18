@@ -17,14 +17,13 @@ public class ValidatorManager {
 
     private HashMap<ValidatorTypes, ValidatorBase> validators;
 
-    private static ValidatorManager validatorManager = new ValidatorManager();
-
-    private ValidatorManager() {
+    public ValidatorManager() {
         validators = new HashMap<>();
         validators.put(ValidatorTypes.UNIT_TOKEN_VALIDATOR, new UnitTokenValidator());
         validators.put(ValidatorTypes.ROMAN_NUMERAL_C_OCCURRENCE_VALIDATOR, new RomanNumeralCOccurrenceValidator());
         validators.put(ValidatorTypes.ROMAN_NUMERAL_D_OCCURRENCE_VALIDATOR, new RomanNumeralDOccurrenceValidator());
         validators.put(ValidatorTypes.ROMAN_NUMERAL_I_OCCURRENCE_VALIDATOR, new RomanNumeralIOccurrenceValidator());
+        validators.put(ValidatorTypes.ROMAN_NUMERAL_L_OCCURRENCE_VALIDATOR, new RomanNumeralLOccurrenceValidator());
         validators.put(ValidatorTypes.ROMAN_NUMERAL_M_OCCURRENCE_VALIDATOR, new RomanNumeralMOccurrenceValidator());
         validators.put(ValidatorTypes.ROMAN_NUMERAL_V_OCCURRENCE_VALIDATOR, new RomanNumeralVOccurrenceValidator());
         validators.put(ValidatorTypes.ROMAN_NUMERAL_X_OCCURRENCE_VALIDATOR, new RomanNumeralXOccurrenceValidator());
@@ -35,9 +34,6 @@ public class ValidatorManager {
         validators.put(ValidatorTypes.ROMAN_NUMERAL_SYMBOL_VALIDATOR, new RomanNumeralSymbolValidator());
     }
 
-    public static ValidatorManager getInstance() {
-        return validatorManager;
-    }
 
     public ValidationResult runValidatorByType(String input, ValidatorTypes validatorType) {
         return validators.get(validatorType).validate(input);
@@ -47,6 +43,14 @@ public class ValidatorManager {
         List<ValidationResult> validationResults = new ArrayList<>();
         for (ValidatorBase validator : validators.values()) {
             validationResults.add(validator.validate(inputLine));
+        }
+        return validationResults;
+    }
+
+    public List<ValidationResult> runMultipleValidatorsByType(String input, List<ValidatorTypes> validatorTypes) {
+        List<ValidationResult> validationResults = new ArrayList<>();
+        for (ValidatorTypes validatorType : validatorTypes) {
+            validationResults.add(runValidatorByType(input, validatorType));
         }
         return validationResults;
     }

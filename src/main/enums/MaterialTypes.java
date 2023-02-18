@@ -16,7 +16,7 @@ public enum MaterialTypes {
         return commodityType;
     }
 
-    public static MaterialTypes getCommodityByValue(String value) {
+    public static MaterialTypes getMaterialByValue(String value) {
         for (MaterialTypes commodity : values()) {
             if (commodity.commodityType.equals(value)) {
                 return commodity;

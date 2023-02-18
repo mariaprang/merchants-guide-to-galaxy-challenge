@@ -34,7 +34,7 @@ public abstract class RomanNumeralValidatorBase extends ValidatorBase {
             String currentSymbol = String.valueOf(input.charAt(index));
             String nextSymbol = String.valueOf(input.charAt(index + 1));
             int symbolOccurence = 0;
-            while (nextSymbol.equals(currentSymbol)) {
+            while (nextSymbol.equals(currentSymbol) && currentSymbol.equals(symbol.getRomanNumeral())) {
                 symbolOccurence++;
                 if(index + symbolOccurence >= input.length()){
                     break;

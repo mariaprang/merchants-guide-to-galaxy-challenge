@@ -16,7 +16,7 @@ public class MapperParser implements Parser {
     public void parse(String inputLine) {
         MapManager mapManager = MapManager.getInstance();
         String[] inputTokens = inputLine.split(InputKeywords.DELIMITER);
-        ValidationResult validationResult = ValidatorManager.getInstance().runValidatorByType(inputTokens[2], ValidatorTypes.ROMAN_NUMERAL_SYMBOL_VALIDATOR);
+        ValidationResult validationResult = new ValidatorManager().runValidatorByType(inputTokens[2], ValidatorTypes.ROMAN_NUMERAL_SYMBOL_VALIDATOR);
         if (validationResult.getStatus().equals(ValidationStatus.VALID)) {
             mapManager.addUnitToRomanNumeralEntry(inputTokens[0], RomanSymbols.valueOf(inputTokens[2]));
             return;

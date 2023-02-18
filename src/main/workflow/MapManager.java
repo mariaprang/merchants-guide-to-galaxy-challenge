@@ -8,10 +8,8 @@ import java.util.Map;
 
 public class MapManager {
 
-    // TODO: Think - should this be a singleton class
     private static MapManager mapManager = new MapManager();
     // glob -> A
-
     private Map<String, RomanSymbols> unitToRomanNumeralMap;
     // Silver - 10
     private Map<MaterialTypes, Integer> commodityToCreditMap;
