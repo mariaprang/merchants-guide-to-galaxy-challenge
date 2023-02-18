@@ -14,13 +14,47 @@ public class MapManager {
     // Silver - 10
     private Map<MaterialTypes, Integer> commodityToCreditMap;
 
+    private Map<String, String> creditQueryResultMap;
+    private Map<String, Integer> romanNumberQueryResultMap;
+
     private MapManager() {
         this.unitToRomanNumeralMap = new HashMap<>();
         this.commodityToCreditMap = new HashMap<>();
+        this.creditQueryResultMap = new HashMap<>();
+        this.romanNumberQueryResultMap = new HashMap<>();
     }
 
-    public static MapManager getInstance(){
+    public static MapManager getInstance() {
         return mapManager;
+    }
+
+    public void addCreditQueryEntry(String romanNumeralFromQuery, String result) {
+        creditQueryResultMap.put(romanNumeralFromQuery, result);
+    }
+
+    public void addRomanNumberQueryEntry(String romanNumeralFromQuery, Integer result) {
+        romanNumberQueryResultMap.put(romanNumeralFromQuery, result);
+    }
+
+
+    public String getCreditQueryResultMapAsString() {
+        String result = "";
+        for (Map.Entry<String, String> entry : creditQueryResultMap.entrySet()) {
+            result += entry.getKey() + " is " + entry.getValue() + " Credits\n";
+        }
+        return result;
+    }
+
+    public String getRomanNumberQueryResultMapAsString() {
+        String result = "";
+        for (Map.Entry<String, Integer> entry : romanNumberQueryResultMap.entrySet()) {
+            result += entry.getKey() + " is " + entry.getValue();
+        }
+        return result;
+    }
+
+    public int getIntegerResultFromRomanNumeral(String romanNumber){
+        return romanNumberQueryResultMap.get(romanNumber);
     }
 
     public void addUnitToRomanNumeralEntry(String key, RomanSymbols value) {
@@ -39,11 +73,11 @@ public class MapManager {
         return unitToRomanNumeralMap;
     }
 
-    public RomanSymbols getRomanNumeralByUnit(String unit){
+    public RomanSymbols getRomanNumeralByUnit(String unit) {
         return unitToRomanNumeralMap.get(unit);
     }
 
-    public Integer getCreditByCommodity(MaterialTypes commodity){
+    public Integer getCreditByCommodity(MaterialTypes commodity) {
         return commodityToCreditMap.get(commodity);
     }
 }
