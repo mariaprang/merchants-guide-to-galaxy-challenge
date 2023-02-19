@@ -80,8 +80,17 @@ appropriately.
 
 ## Instructions to run code
 
+First ensure that java version installed is 17 or higher. To check, input the following command in the terminal:  
 
 ```
 $ java -version
 ```
 
+When downloaded, the project's main directory will contain a challenge.jar file 
+Running the project can either be done by importing it into the coding editor of your choice 
+or by accessing the jar file from the terminal by doing the following: 
+
+```
+change directory to project root: cd [folder name]
+run the jar file: java -jar challenge.jar
+```

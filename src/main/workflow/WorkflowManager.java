@@ -7,6 +7,7 @@ import main.parsers.*;
 import main.validators.ValidatorManager;
 
 import java.io.*;
+import java.security.InvalidParameterException;
 
 public class WorkflowManager {
 
@@ -49,30 +50,38 @@ public class WorkflowManager {
             String line = "";
             while ((line = reader.readLine()) != null) {
                 InputTypes inputType = getInputType(line);
-                switch (inputType) {
-                    case MAPPING:
-                        parser = new MapperParser();
-                        break;
-                    case COMMODITY_PRICE_INFORMATION:
-                        parser = new MetalPriceInformationParser();
-                        break;
-                    case ROMAN_NUMBER_QUESTION:
-                        parser = new RomanNumeralQueryParser();
-                        break;
-                    case CREDIT_VALUE_QUESTION:
-                        parser = new RomanNumberMetalQueryParser();
-                        break;
-                    default:
-                        break;
+                try {
+                    switch (inputType) {
+                        case MAPPING:
+                            parser = new MapperParser();
+                            break;
+                        case COMMODITY_PRICE_INFORMATION:
+                            parser = new MetalPriceInformationParser();
+                            break;
+                        case ROMAN_NUMBER_QUESTION:
+                            parser = new RomanNumeralQueryParser();
+                            break;
+                        case CREDIT_VALUE_QUESTION:
+                            parser = new RomanNumberMetalQueryParser();
+                            break;
+                        default:
+                            break;
+                    }
+                    parser.parse(line);
                 }
-                parser.parse(line);
+                catch (InvalidParameterException exception){
+                    System.out.println(exception.getMessage());
+                }
             }
             System.out.println(MapManager.getInstance().getCreditQueryResultMapAsString());
             System.out.println(MapManager.getInstance().getRomanNumberQueryResultMapAsString());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException exception) {
+            exception.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        catch (InvalidParameterException exception){
+            System.out.println(exception.getMessage());
         }
 
     }

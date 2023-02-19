@@ -9,6 +9,7 @@ import main.validators.romanNumeralsValidator.placementValidators.RomanIPlacemen
 import main.validators.romanNumeralsValidator.RomanNumeralValidatorBase;
 import main.validators.romanNumeralsValidator.placementValidators.RomanXPlacementValidator;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,9 +57,17 @@ public class ValidatorManager {
      */
     public List<ValidationResult> runMultipleValidatorsByType(String input, List<ValidatorTypes> validatorTypes) {
         List<ValidationResult> validationResults = new ArrayList<>();
-        for (ValidatorTypes validatorType : validatorTypes) {
-            validationResults.add(runValidatorByType(input, validatorType));
-        }
+
+        try{
+
+           for (ValidatorTypes validatorType : validatorTypes) {
+               validationResults.add(runValidatorByType(input, validatorType));
+           }
+
+       }
+       catch (InvalidParameterException exception){
+           System.out.println(exception.getMessage());
+       }
         return validationResults;
     }
 
