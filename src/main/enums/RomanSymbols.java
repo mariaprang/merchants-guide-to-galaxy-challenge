@@ -1,6 +1,9 @@
 package main.enums;
 
-
+/**
+ * Enumeration containing all of the valid roman symbols.
+ * Other symbols are not accepted in the parsers
+ */
 public enum RomanSymbols {
 
     I(1),

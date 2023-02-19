@@ -2,6 +2,9 @@ package main.validators;
 
 import main.enums.ValidationStatus;
 
+/**
+ * Class representing a result from validation method. Contains its status and an error message, if any
+ */
 public class ValidationResult {
 
     private ValidationStatus status;

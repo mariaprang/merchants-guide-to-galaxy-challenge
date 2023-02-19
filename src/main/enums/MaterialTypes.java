@@ -1,5 +1,8 @@
 package main.enums;
 
+/**
+ * Set of dfferent material types
+ */
 public enum MaterialTypes {
 
     SILVER("Silver"),

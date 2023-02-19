@@ -1,11 +1,18 @@
 package main.converters;
 
 import main.enums.RomanSymbols;
-
 import java.security.InvalidParameterException;
 
+/**
+ * Class responsible for receiving a romanNumber in form "IV..." and converting it to a valid corresponding integer
+ */
 public class RomanToIntegerConverter {
 
+    /**
+     * Converts recursively the value of a roman numeral string
+     * @param romanNumber - roman number as string
+     * @return int - a valid integer result of conversion from roman numeral to decimal
+     */
     public int convertRomanToInteger(String romanNumber) {
 
         if(romanNumber.isEmpty()) return 0;

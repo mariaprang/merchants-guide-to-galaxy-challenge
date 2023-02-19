@@ -1,5 +1,8 @@
 package main.inputKeywords;
 
+/**
+ * Class holding static keywords used in input phrases
+ */
 public class InputKeywords {
 
     public static String MATCH_PHRASE = "is";

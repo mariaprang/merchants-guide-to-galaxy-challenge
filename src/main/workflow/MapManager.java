@@ -6,12 +6,13 @@ import main.enums.RomanSymbols;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class responsible for the connections between all other classes withing a project
+ */
 public class MapManager {
 
     private static MapManager mapManager = new MapManager();
-    // glob -> A
     private Map<String, RomanSymbols> unitToRomanNumeralMap;
-    // Silver - 10
     private Map<MaterialTypes, Double> commodityToCreditMap;
 
     private Map<String, Double> creditQueryResultMap;
@@ -35,7 +36,6 @@ public class MapManager {
     public void addRomanNumberQueryEntry(String romanNumeralFromQuery, Integer result) {
         romanNumberQueryResultMap.put(romanNumeralFromQuery, result);
     }
-
 
     public String getCreditQueryResultMapAsString() {
         String result = "";

@@ -14,12 +14,19 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parser parsing a single string, such as "how many Credits is glob prok Silver" by converting the unit tokens to
+ * a roman number, calling validators for checking if the roman number is valid and then calculating credits based on the
+ * mapped information in the MapManager about this specific metal type
+ */
 public class RomanNumberMetalQueryParser implements Parser {
 
+    /**
+     * Converts a unit token phrase, such as "glob prok Silver" to a roman number and evaluates its credit value
+     * @param inputLine - single input line, such as "how many Credits is glob prok Silvers"
+     */
     @Override
     public void parse(String inputLine) {
-        // how many Credits is glob prok Silver
-
         String[] inputTokens = inputLine.split(InputKeywords.DELIMITER);
         int sizeOfPhrase = InputKeywords.CREDIT_PHRASE.split(InputKeywords.DELIMITER).length;
         String unitTokens = "";
@@ -43,14 +50,21 @@ public class RomanNumberMetalQueryParser implements Parser {
             throw new InvalidParameterException(validationResult.getMessage());
         }
 
+
+
         String commodityString = unitsAndCommodityTokens[unitsAndCommodityTokens.length - 1];
         String romanNumber = TokenToRomanNumberConverter.convertToRomanNumber(units.trim());
-        List<ValidationResult> validationResultLists = runValidatorsOnRomanNumber(romanNumber);
+        List<ValidationResult> validationResultList = runValidatorsOnRomanNumber(romanNumber);
 
-        for (ValidationResult result : validationResultLists) {
+        List<String> errorMessages = new ArrayList<>();
+        for (ValidationResult result : validationResultList) {
             if (result.getStatus().equals(ValidationStatus.INVALID)) {
-                throw new InvalidParameterException(result.getMessage());
+                errorMessages.add(result.getMessage());
             }
+        }
+
+        if (errorMessages.size() > 0) {
+            throw new InvalidParameterException(errorMessages.toArray().toString());
         }
 
         MaterialTypes materialType = MaterialTypes.getMaterialByValue(commodityString);

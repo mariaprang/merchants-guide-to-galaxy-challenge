@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Manager class, initializing and executing and e
+ */
 public class ValidatorManager {
 
     private HashMap<ValidatorTypes, ValidatorBase> validators;
@@ -34,19 +37,23 @@ public class ValidatorManager {
         validators.put(ValidatorTypes.ROMAN_NUMERAL_SYMBOL_VALIDATOR, new RomanNumeralSymbolValidator());
     }
 
+    /**
+     * Retrieves and runs a validator by type
+     * @param input
+     * @param validatorType - type of a validator to run
+     * @return - ValidationResult - error message + status (Invalid, Valid)
+     */
 
     public ValidationResult runValidatorByType(String input, ValidatorTypes validatorType) {
         return validators.get(validatorType).validate(input);
     }
 
-    public List<ValidationResult> runValidators(String inputLine) {
-        List<ValidationResult> validationResults = new ArrayList<>();
-        for (ValidatorBase validator : validators.values()) {
-            validationResults.add(validator.validate(inputLine));
-        }
-        return validationResults;
-    }
-
+    /**
+     * Retrieves and runs multiple validators by type
+     * @param input
+     * @param validatorTypes - all of the validators to run
+     * @return - ValidationResult - error message + status (Invalid, Valid)
+     */
     public List<ValidationResult> runMultipleValidatorsByType(String input, List<ValidatorTypes> validatorTypes) {
         List<ValidationResult> validationResults = new ArrayList<>();
         for (ValidatorTypes validatorType : validatorTypes) {

@@ -6,6 +6,9 @@ import main.validators.ValidationResult;
 
 import java.util.List;
 
+/**
+ * Validator interface implemented in all of the validators.
+ */
 public interface Validator {
 
     /**

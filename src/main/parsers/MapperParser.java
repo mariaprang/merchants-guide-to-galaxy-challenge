@@ -10,8 +10,15 @@ import main.workflow.MapManager;
 
 import java.security.InvalidParameterException;
 
+/**
+ * Parser for mapping phrases, such as "glob is I"
+ */
 public class MapperParser implements Parser {
 
+    /**
+     * Parser calls the MapManager and adds unitToken "glob" as a key for value "I"
+     * @param inputLine - single input line, such as "glob is I"
+     */
     @Override
     public void parse(String inputLine) {
         MapManager mapManager = MapManager.getInstance();

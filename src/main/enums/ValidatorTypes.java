@@ -1,5 +1,8 @@
 package main.enums;
 
+/**
+ * Enumeration for various types of validators based on the rules scenarios
+ */
 public enum ValidatorTypes {
 
     NONE,

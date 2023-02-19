@@ -14,12 +14,18 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class responsible for evaluating the price value in Credits of a certain MetalType
+ */
 public class MetalPriceInformationParser implements Parser {
 
+    /**
+     * Parser calls the MapManager and adds metal type, such as "Silver" as a key for value of how many credits it holds
+     * This method calls validators required for this operation and throws an InvalidParameter exception if any validators came back Invalid
+     * @param inputLine - single input line, such as "glob glob Silver is 34 Credits"
+     */
     @Override
     public void parse(String inputLine) {
-        //glob glob Silver is 34 Credits
-
         String[] tokens = inputLine.split(InputKeywords.DELIMITER);
         int credits = 0;
         String unitsAndCommodity = "";

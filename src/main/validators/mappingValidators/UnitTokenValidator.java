@@ -15,7 +15,7 @@ public class UnitTokenValidator extends ValidatorBase {
      * unit based on the "dictionary" obtained from a parser
      *
      * @param inputLine - unit and commodity phrase, such as "pish pish Iron"
-     * @return
+     * @return - ValidationResult - error message + status (Invalid, Valid)
      */
 
     @Override
